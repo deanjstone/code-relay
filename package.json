@@ -1,0 +1,16 @@
+{
+  "name": "code-relay",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Provider-agnostic PWA remote console for AI coding agents",
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "build": "pnpm -r run build",
+    "typecheck": "pnpm -r run typecheck",
+    "lint": "pnpm -r run lint"
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=9"
+  }
+}
