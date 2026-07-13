@@ -19,17 +19,21 @@ export function LaunchForm() {
     event.preventDefault()
     setStatus({ kind: 'launching' })
 
-    const result = await launchSession({
-      name: name.trim() || undefined,
-      prompt: prompt.trim() || undefined,
-    })
+    try {
+      const result = await launchSession({
+        name: name.trim() || undefined,
+        prompt: prompt.trim() || undefined,
+      })
 
-    if (result.ok) {
-      setStatus({ kind: 'ok', name: result.name ?? 'AGENT' })
-      setName('')
-      setPrompt('')
-    } else {
-      setStatus({ kind: 'error', message: messageForReason(result.reason) })
+      if (result.ok) {
+        setStatus({ kind: 'ok', name: result.name ?? 'AGENT' })
+        setName('')
+        setPrompt('')
+      } else {
+        setStatus({ kind: 'error', message: messageForReason(result.reason) })
+      }
+    } catch {
+      setStatus({ kind: 'error', message: "Network error — check you're on Tailscale." })
     }
   }
 
