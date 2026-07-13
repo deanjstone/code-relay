@@ -1,0 +1,15 @@
+[Unit]
+Description=Code Relay Server
+After=network.target
+
+[Service]
+Environment=PATH=%h/.local/share/fnm/aliases/default/bin:%h/.local/share/pnpm:%h/.local/share/fnm:/usr/local/bin:/usr/bin:/bin
+Type=simple
+WorkingDirectory=%h/.argus/code-relay/server
+EnvironmentFile=%h/.argus/code-relay/.env
+ExecStart=%h/.local/share/fnm/aliases/default/bin/node %h/.argus/code-relay/server/dist/index.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
