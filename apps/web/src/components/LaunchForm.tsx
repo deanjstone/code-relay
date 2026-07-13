@@ -39,30 +39,30 @@ export function LaunchForm() {
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <label className="flex flex-col gap-1">
-          <span className="text-sm text-slate-300">Session name (optional)</span>
+          <span className="text-sm text-indigo-300">Session name (optional)</span>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="AGENT"
             autoFocus
-            className="rounded-md bg-slate-800 px-3 py-2 text-base outline-none ring-1 ring-slate-700 focus:ring-sky-400"
+            className="rounded-md bg-indigo-900 px-3 py-2 text-base text-indigo-50 outline-none ring-1 ring-indigo-700 placeholder-indigo-400 focus:ring-violet-400"
           />
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm text-slate-300">First prompt (optional)</span>
+          <span className="text-sm text-indigo-300">First prompt (optional)</span>
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             rows={5}
-            className="rounded-md bg-slate-800 px-3 py-2 text-base outline-none ring-1 ring-slate-700 focus:ring-sky-400"
+            className="rounded-md bg-indigo-900 px-3 py-2 text-base text-indigo-50 outline-none ring-1 ring-indigo-700 placeholder-indigo-400 focus:ring-violet-400"
           />
         </label>
 
         <button
           type="submit"
           disabled={status.kind === 'launching'}
-          className="rounded-md bg-sky-500 px-4 py-3 text-base font-medium text-slate-900 active:bg-sky-400 disabled:opacity-60"
+          className="rounded-md bg-violet-600 px-4 py-3 text-base font-semibold text-white active:bg-violet-500 disabled:opacity-60"
         >
           {status.kind === 'launching' ? 'Launching…' : 'Launch'}
         </button>
