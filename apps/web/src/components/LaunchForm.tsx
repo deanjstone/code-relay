@@ -45,7 +45,7 @@ export function LaunchForm() {
             onChange={(e) => setName(e.target.value)}
             placeholder="AGENT"
             autoFocus
-            className="rounded-md bg-indigo-900 px-3 py-2 text-base outline-none ring-1 ring-indigo-700 focus:ring-violet-400"
+            className="rounded-md bg-indigo-900 px-3 py-2 text-base text-indigo-50 outline-none ring-1 ring-indigo-700 placeholder-indigo-400 focus:ring-violet-400"
           />
         </label>
 
@@ -55,14 +55,14 @@ export function LaunchForm() {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             rows={5}
-            className="rounded-md bg-indigo-900 px-3 py-2 text-base outline-none ring-1 ring-indigo-700 focus:ring-violet-400"
+            className="rounded-md bg-indigo-900 px-3 py-2 text-base text-indigo-50 outline-none ring-1 ring-indigo-700 placeholder-indigo-400 focus:ring-violet-400"
           />
         </label>
 
         <button
           type="submit"
           disabled={status.kind === 'launching'}
-          className="rounded-md bg-violet-500 px-4 py-3 text-base font-medium text-indigo-950 active:bg-violet-400 disabled:opacity-60"
+          className="rounded-md bg-violet-600 px-4 py-3 text-base font-semibold text-white active:bg-violet-500 disabled:opacity-60"
         >
           {status.kind === 'launching' ? 'Launching…' : 'Launch'}
         </button>
