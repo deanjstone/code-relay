@@ -1,12 +1,21 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import websocket from '@fastify/websocket'
+import fastifyStatic from '@fastify/static'
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
 import { registerSessionsRoutes } from './routes/sessions.js'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const PORT = Number(process.env['PORT'] ?? 3800)
+const WEB_DIST_DIR = process.env['WEB_DIST_DIR'] ?? join(__dirname, '../../web/dist')
 
 const server = Fastify({ logger: true })
 
 await server.register(cors)
 await server.register(websocket)
+await server.register(fastifyStatic, { root: WEB_DIST_DIR })
 
 server.get('/health', async () => ({ status: 'ok' }))
 
@@ -16,4 +25,4 @@ if (!lgn5ListenerUrl) {
 }
 registerSessionsRoutes(server, { lgn5ListenerUrl })
 
-await server.listen({ port: 3800, host: '0.0.0.0' })
+await server.listen({ port: PORT, host: '0.0.0.0' })
