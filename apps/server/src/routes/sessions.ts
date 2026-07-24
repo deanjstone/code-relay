@@ -1,8 +1,11 @@
 import type { FastifyInstance } from 'fastify';
+import { checkHealth } from '../lib/health.js';
 
 interface LaunchRequestBody {
   name?: string;
   prompt?: string;
+  project?: string;
+  subPath?: string;
 }
 
 export interface SessionsRouteOptions {
@@ -35,16 +38,4 @@ export function registerSessionsRoutes(server: FastifyInstance, options: Session
 
     return (await launchRes.json()) as unknown;
   });
-}
-
-async function checkHealth(fetchFn: typeof fetch, baseUrl: string, timeoutMs: number): Promise<boolean> {
-  try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
-    const res = await fetchFn(`${baseUrl}/health`, { signal: controller.signal });
-    clearTimeout(timer);
-    return res.ok;
-  } catch {
-    return false;
-  }
 }

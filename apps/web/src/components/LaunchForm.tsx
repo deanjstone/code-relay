@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { launchSession } from '../lib/api'
+import { ProjectPicker, type ProjectSelection } from './ProjectPicker'
 
 type Status = { kind: 'idle' } | { kind: 'launching' } | { kind: 'ok'; name: string } | { kind: 'error'; message: string }
 
@@ -13,6 +14,7 @@ function messageForReason(reason?: string): string {
 export function LaunchForm() {
   const [name, setName] = useState('')
   const [prompt, setPrompt] = useState('')
+  const [selection, setSelection] = useState<ProjectSelection>({})
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -23,6 +25,8 @@ export function LaunchForm() {
       const result = await launchSession({
         name: name.trim() || undefined,
         prompt: prompt.trim() || undefined,
+        project: selection.project,
+        subPath: selection.subPath,
       })
 
       if (result.ok) {
@@ -42,6 +46,8 @@ export function LaunchForm() {
       <h1 className="text-xl font-semibold">Launch Agent</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <ProjectPicker onChange={setSelection} />
+
         <label className="flex flex-col gap-1">
           <span className="text-sm text-indigo-300">Session name (optional)</span>
           <input
