@@ -39,7 +39,10 @@ These rules are non-negotiable and must never be violated without explicit Direc
 
 ## Director-Agent Workflow
 
-- All non-trivial work begins with a task file in `.claude/tasks/task-NNN-<name>.md`.
-- Claude must append its implementation plan to the task file before writing any code.
-- Code execution is blocked until the Director provides explicit approval in chat.
-- Chat is the UI; the task file is the source of truth.
+- Non-trivial changes begin with a GitHub issue, not a task file. Claude writes the spec into the issue body under `## Specification`, then appends `## AI Implementation Plan` (files to create/modify/delete, step-by-step execution, risks) before making changes.
+- Wayfinder ticket-type labels apply where relevant: `wayfinder:grilling` for open decisions, `wayfinder:task` for build work with a known shape — see `reference_wayfinder_ticket_types` memory.
+- Small, well-scoped edits do not require an issue.
+- Chat remains the approval gate — Claude summarises the plan in chat and waits for explicit Director approval before executing. The GitHub issue is the permanent record; close it with a `## Resolution` comment once done.
+- `.claude/tasks/task-NNN-*.md` is retired as the source of truth (superseded 2026-07-17 across all other Director-Agent repos; applied here to bring code-relay in line). Any existing task files stay as historical archive only — no new ones are created.
+
+**Migration note (2026-07-24):** code-relay was omitted from the 2026-07-17 batch migration (myargus, argus, budget, ccbot, mcp-memory, atto1, cmdpal, erto-apps) since it wasn't yet part of the Director-Agent repo set at the time. Brought in line here, mirroring the same 9th-repo fix already applied to argus-config (argus-config#75/#76).
