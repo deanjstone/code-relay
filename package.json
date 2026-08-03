@@ -1,6 +1,7 @@
 {
   "name": "code-relay",
   "version": "0.0.1",
+  "packageManager": "pnpm@11.9.0",
   "private": true,
   "description": "Provider-agnostic PWA remote console for AI coding agents",
   "scripts": {
@@ -12,5 +13,12 @@
   "engines": {
     "node": ">=22",
     "pnpm": ">=9"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/npm": "^12.0.1",
+    "semantic-release": "^24.2.3"
   }
 }

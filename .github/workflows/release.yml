@@ -1,20 +1,23 @@
-name: CI
+name: Release
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 permissions:
-  contents: read
+  contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
-  build:
-    name: Build
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - uses: pnpm/action-setup@v4
 
@@ -26,15 +29,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Typecheck
-        run: pnpm run --if-present typecheck
-
-      - name: Lint
-        run: pnpm run --if-present lint
-
-      - name: Build
-        run: pnpm run --if-present build
-
-      - name: Test
-        run: pnpm run --if-present test
-
+      - name: Release
+        run: pnpm exec semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
