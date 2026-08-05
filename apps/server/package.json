@@ -11,6 +11,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@code-relay/types": "workspace:*",
     "@fastify/cors": "^11.2.0",
     "@fastify/static": "^10.1.0",
     "@fastify/websocket": "^11.2.0",
