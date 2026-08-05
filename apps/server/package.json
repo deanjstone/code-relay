@@ -11,13 +11,13 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@code-relay/types": "workspace:*",
     "@fastify/cors": "^11.2.0",
     "@fastify/static": "^10.1.0",
     "@fastify/websocket": "^11.2.0",
     "fastify": "^5.9.0"
   },
   "devDependencies": {
+    "@code-relay/types": "workspace:*",
     "@types/node": "^26.1.0",
     "tsx": "^4.23.0",
     "typescript": "~5.8.3",
