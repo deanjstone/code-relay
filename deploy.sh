@@ -26,7 +26,23 @@ ok "apps/server/dist and apps/web/dist built"
 step "[2/6] Syncing server to ${HOST}:${DEST}/server"
 ssh "${HOST}" "mkdir -p ${DEST}/server"
 rsync -a --delete "${SRC_DIR}/apps/server/dist/" "${HOST}:${DEST}/server/dist/"
-rsync -a "${SRC_DIR}/apps/server/package.json" "${HOST}:${DEST}/server/package.json"
+
+# Ship a runtime-only package.json, not the source one: the source file's
+# devDependencies can carry pnpm workspace-protocol specifiers
+# ("@code-relay/types": "workspace:*") that plain npm can't even parse --
+# not just "won't install", it errors immediately with EUNSUPPORTEDPROTOCOL
+# regardless of --omit=dev, since that only skips *installing* the section,
+# not parsing it. None of those packages are needed at runtime anyway (the
+# build already happened locally, above); the remote only ever needs
+# `dependencies`.
+RUNTIME_PACKAGE_JSON="$(mktemp)"
+node -e "
+  const pkg = require('${SRC_DIR}/apps/server/package.json');
+  const runtime = { name: pkg.name, version: pkg.version, private: pkg.private, type: pkg.type, dependencies: pkg.dependencies };
+  console.log(JSON.stringify(runtime, null, 2));
+" > "${RUNTIME_PACKAGE_JSON}"
+rsync -a "${RUNTIME_PACKAGE_JSON}" "${HOST}:${DEST}/server/package.json"
+rm -f "${RUNTIME_PACKAGE_JSON}"
 ok "server dist/ synced"
 
 step "[3/6] Syncing web to ${HOST}:${DEST}/web/dist"
