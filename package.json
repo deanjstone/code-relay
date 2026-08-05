@@ -1,6 +1,6 @@
 {
   "name": "code-relay",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "packageManager": "pnpm@11.9.0",
   "private": true,
   "description": "Provider-agnostic PWA remote console for AI coding agents",

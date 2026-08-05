@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/deanjstone/code-relay/compare/v1.1.1...v1.1.2) (2026-08-05)
+
+
+### Bug Fixes
+
+* **deploy:** ship a runtime-only package.json to the remote server ([bf6a3ca](https://github.com/deanjstone/code-relay/commit/bf6a3ca1993266446b1c99f1e43f912c4a2301f8)), closes [13/#19](https://github.com/deanjstone/code-relay/issues/19)
+
 ## [1.1.1](https://github.com/deanjstone/code-relay/compare/v1.1.0...v1.1.1) (2026-08-05)
 
 
