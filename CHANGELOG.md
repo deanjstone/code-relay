@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/deanjstone/code-relay/compare/v1.0.0...v1.1.0) (2026-08-05)
+
+
+### Features
+
+* Tailscale identity gate + herdr-backed RelayEvent stream ([cfc819a](https://github.com/deanjstone/code-relay/commit/cfc819a39497273ef88aaf89c62214827e4cb335)), closes [#132](https://github.com/deanjstone/code-relay/issues/132)
+
 # 1.0.0 (2026-08-03)
 
 
