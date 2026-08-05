@@ -26,9 +26,6 @@ importers:
 
   apps/server:
     dependencies:
-      '@code-relay/types':
-        specifier: workspace:*
-        version: link:../../packages/types
       '@fastify/cors':
         specifier: ^11.2.0
         version: 11.2.0
@@ -42,6 +39,9 @@ importers:
         specifier: ^5.9.0
         version: 5.9.0
     devDependencies:
+      '@code-relay/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@types/node':
         specifier: ^26.1.0
         version: 26.1.0
