@@ -14,7 +14,7 @@ export interface IdentityCheckResult {
  * Validates the `Tailscale-User-Login` header `tailscale serve` injects
  * against the configured trusted user, following collie's
  * COLLIE_TRUSTED_USER pattern (see bridge/server.ts's checkAccess in
- * ~/projects/reference/collie) with one deliberate departure: collie lets a
+ * ~/repos/reference/collie) with one deliberate departure: collie lets a
  * *missing* header through unchanged (it also supports a raw reverse-proxy
  * deployment where the header is legitimately never present), but
  * code-relay only ever runs behind `tailscale serve` — so once a trusted

@@ -36,7 +36,7 @@ wt.exe new-tab → wsl.exe -e bash -ic "cd ~/.argus/workspace && claude [prompt]
 
 ### Scope of changes
 
-**Repo: `~/projects/argus/packages/agent-cli/` (new HTTP surface for launching)**
+**Repo: `~/repos/argus/packages/agent-cli/` (new HTTP surface for launching)**
 
 Files to create:
 - `src/commands/listen.ts` — `agent listen [--port 3748]` subcommand. Starts a minimal HTTP server (reuse the `fastify`-free style already in this package, or add `fastify` as a dep — TBD at implementation time based on what's already a dependency). Binds to `0.0.0.0` (WSL2 loopback to Tailscale is already scoped by the Windows firewall / Tailscale ACLs, consistent with how `agent-engine` currently binds) unless a Tailscale IP is trivially resolvable, in which case prefer binding to that. Routes:
@@ -52,9 +52,9 @@ Files NOT touched:
 - `lib/wt.ts`, `lib/projects.ts` — reused as-is, not modified
 
 **New: systemd user service on LGN5 (WSL2)**
-- `~/projects/argus-config/wsl2/services/agent-listen.service` (or similar path — matches the pattern used for `agent-engine` on homelab) — `systemctl --user enable --now agent-listen`, autostarts via the existing "WSL2 Boot" scheduled task + systemd-as-PID1 setup.
+- `~/repos/argus-config/wsl2/services/agent-listen.service` (or similar path — matches the pattern used for `agent-engine` on homelab) — `systemctl --user enable --now agent-listen`, autostarts via the existing "WSL2 Boot" scheduled task + systemd-as-PID1 setup.
 
-**Repo: `~/projects/code-relay/` (relay backend + PWA)**
+**Repo: `~/repos/code-relay/` (relay backend + PWA)**
 
 Files to create:
 - `apps/server/src/routes/sessions.ts` — `POST /sessions/launch`: health-checks the LGN5 listener first (short timeout, e.g. 2s); on failure returns `503 { ok: false, reason: 'lgn5_unreachable' }`; on success proxies to `POST /launch` and relays the result.
