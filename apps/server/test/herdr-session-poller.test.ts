@@ -9,7 +9,7 @@ function entry(overrides: Record<string, unknown> = {}) {
   return {
     agent: 'claude',
     agent_status: 'working',
-    cwd: '/home/deanj/projects/argus',
+    cwd: '/home/deanj/repos/argus',
     pane_id: 'wC:p2',
     tab_id: 'wC:t2',
     workspace_id: 'wC',

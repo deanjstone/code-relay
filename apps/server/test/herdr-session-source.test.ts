@@ -9,7 +9,7 @@ function entry(overrides: Partial<HerdrAgentEntry> = {}): HerdrAgentEntry {
   return {
     agent: 'claude',
     agent_status: 'working',
-    cwd: '/home/deanj/projects/argus',
+    cwd: '/home/deanj/repos/argus',
     pane_id: 'wC:p2',
     tab_id: 'wC:t2',
     workspace_id: 'wC',
@@ -93,7 +93,7 @@ describe('diffHerdrRoster', () => {
 
     const { events, roster } = diffHerdrRoster(prev, [
       entry({ agent_status: 'blocked' }),
-      entry({ pane_id: 'wA:p2', cwd: '/home/deanj/projects/hearth-fork', agent_status: 'working' }),
+      entry({ pane_id: 'wA:p2', cwd: '/home/deanj/repos/hearth-fork', agent_status: 'working' }),
     ]);
 
     expect(events).toEqual([
